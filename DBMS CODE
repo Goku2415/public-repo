@@ -55,6 +55,10 @@ CREATE TABLE Course (Course_ID INT PRIMARY KEY, Course_Name VARCHAR(100),Credits
 Department_ID INT,FOREIGN KEY (Department_ID) REFERENCES Department(Department_ID));
 •	Enrollment Table
 CREATE TABLE Enrollment (Enrollment_ID INT PRIMARY KEY,Student_ID INT NOT NULL,Course_ID INT NOT NULL,GRADE VARCHAR(5),FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID),FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID);
+
+
+
+
 3. Applying Constraints to the College Database
 •	PRIMARY KEY – uniquely identifies a row in a table
 •	FOREIGN KEY – creates a link between two tables
@@ -74,6 +78,10 @@ ________________________________________
 Enrollment Table
 CREATE TABLE Enrollment (Enrollment_ID INT PRIMARY KEY,Student_ID INT NOT NULL,Course_ID INT NOT NULL,GRADE VARCHAR(5),FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID),FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID));
 ________________________________________
+
+
+
+
 4. Practicing DDL & DML Commands
  A. DDL Commands 
 Add a column to Student table
@@ -103,6 +111,11 @@ SELECT * FROM Student;
 
 Select students in Computer Science department
 SELECT s.Name, d.Dept_Name FROM Student s JOIN Department d ON s.Department_ID = d.Department_ID WHERE d.Dept_Name = 'Computer Science';
+
+
+
+
+
 5. SQL Queries Using JOINs
 INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN, SELF JOIN 
  INNER JOIN
@@ -138,6 +151,9 @@ SELECT a.Name AS Instructor1, b.Name AS Instructor2, a.Department_ID
 FROM Instructor a JOIN Instructor b ON a.Department_ID = b.Department_ID AND a.Instructor_ID <> b.Instructor_ID;
 
 
+
+
+
 6.	SQL Queries with Aggregate Functions
 ________________________________________
 📌 MAX() – Get the highest value
@@ -164,6 +180,10 @@ ________________________________________
 ✅ AVG with GROUP BY
 Average credits per department
 SELECT d.Dept_Name, AVG(c.Credits) AS AvgCredits FROM Course c JOIN Department d ON c.Department_ID = d.Department_ID GROUP BY d.Dept_Name;
+
+
+
+
 
 7.	 Types of Integrity Constraints:
 1.	PRIMARY KEY
@@ -196,6 +216,10 @@ Ensure that the Credits in the Course table is always between 1 and 6
 CREATE TABLE Course(Course_ID INT PRIMARY KEY,Course_Name VARCHAR(100) NOT NULL,Credits INT NOT NULL,Department_ID INT,FOREIGN KEY (Department_ID) REFERENCES Department(Department_ID),CHECK (Credits >=1 AND Credits <= 6));
 This will prevent the insertion of a course with less than 1 or more than 6 credits.
 ________________________________________
+
+
+
+
 8.	Perform the following operation for demonstrating the insertion, updation and deletion using the referential integrity constraints
 You can combine multiple constraints in one CREATE statement:
 CREATE TABLE Instructor2(Instructor_ID INT PRIMARY KEY, Name VARCHAR(100) NOT NULL,Department_ID INT NOT NULL,FOREIGN KEY (Department_ID) REFERENCES Department(Department_ID),CHECK(Department_ID > 0));
@@ -229,6 +253,11 @@ If we had the ON DELETE CASCADE in place, we could now delete the department and
 DELETE FROM Department
 WHERE Department_ID = 1;
 ________________________________________
+
+
+
+
+
 9.	Write the query for creating the users and their roles
 Creating a User
 
@@ -284,6 +313,10 @@ GRANT admin_role TO john_doe;
 -- 6. Grant CONNECT role to user
 GRANT CONNECT TO john_doe;
 ________________________________________
+
+
+
+
 10.  Querying (using ANY, ALL, IN, EXISTS, NOT EXISTS, UNION, INTERSECT, Constraints)
 •	ANY: Find students who have a score higher than any student in department 1.
 SELECT Name, dob FROM Student WHERE dob > ANY (SELECT dob FROM Student WHERE Department_ID = 1);
@@ -336,7 +369,12 @@ CREATE TABLE Student (
     CHECK (Score >= 0 AND Score <= 100)      -- Check constraint
 );
 ________________________________________
-7. Combining Everything in a Query
+
+
+
+
+
+11. Combining Everything in a Query
 You can combine many of these operators to create complex queries. Here’s an example:
 Complex Example:
 Find all students who are either enrolled in a course offered by department 1 or have a score above 80, but exclude students who have failed any course (score < 50). Use IN, EXISTS, NOT EXISTS, and UNION.
@@ -352,7 +390,7 @@ AND NOT EXISTS (
 );
 
 
-10.	Queries using Aggregate Functions, group By, Having and Creaion and Dropping of Views
+12.	Queries using Aggregate Functions, group By, Having and Creaion and Dropping of Views
 Aggregate functions in SQL allow you to perform calculations on a set of values and return a single result. The most common aggregate functions are:
 •	COUNT(): Counts the number of rows.
 •	SUM(): Returns the sum of values.
